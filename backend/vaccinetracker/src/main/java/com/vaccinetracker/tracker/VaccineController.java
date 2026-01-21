@@ -23,4 +23,15 @@ public class VaccineController {
     public List<VaccineRecord> getAll() {
         return service.findAll();
     }
+
+    @PutMapping("/{id}")
+    public VaccineRecord update(@PathVariable Long id, @RequestBody VaccineRecord record) {
+        return service.update(id, record);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
+
 }
