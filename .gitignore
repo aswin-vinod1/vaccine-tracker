@@ -1,0 +1,12 @@
+# Backend
+/backend/vaccinetracker/target/
+
+# Frontend
+/node_modules/
+
+# IDE
+.idea/
+
+# OS
+.DS_Store
+
