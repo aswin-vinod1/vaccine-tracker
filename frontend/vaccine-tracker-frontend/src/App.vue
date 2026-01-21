@@ -39,36 +39,40 @@
     </form>
 
     <!-- Vaccine Table -->
-    <table v-if="vaccines.length">
-      <thead>
-        <tr>
-          <th>Vaccine</th>
-          <th>Dose</th>
-          <th>Date Taken</th>
-          <th>Next Due</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+    <div class="table-wrapper" v-if="vaccines.length">
+      <table>
+        <thead>
+          <tr>
+            <th>Vaccine</th>
+            <th>Dose</th>
+            <th>Date Taken</th>
+            <th>Next Due</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <tr v-for="v in vaccines" :key="v.id">
-          <td>{{ v.vaccineName }}</td>
-          <td>{{ v.doseNumber }}</td>
-          <td>{{ v.dateTaken }}</td>
-          <td>{{ v.nextDueDate || "-" }}</td>
-          <td>
-            <span :class="v.status.toLowerCase()">
-              {{ v.status }}
-            </span>
-          </td>
-          <td>
-            <button @click="editVaccine(v)">Edit</button>
-            <button class="delete" @click="deleteVaccine(v.id)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <tbody>
+          <tr v-for="v in vaccines" :key="v.id">
+            <td>{{ v.vaccineName }}</td>
+            <td>{{ v.doseNumber }}</td>
+            <td>{{ v.dateTaken }}</td>
+            <td>{{ v.nextDueDate || "-" }}</td>
+            <td>
+              <span :class="v.status.toLowerCase()">
+                {{ v.status }}
+              </span>
+            </td>
+            <td>
+              <button @click="editVaccine(v)">Edit</button>
+              <button class="delete" @click="deleteVaccine(v.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <p v-else>No records found</p>
   </div>
@@ -240,6 +244,10 @@ button.delete:hover {
   background-color: #b91c1c;
 }
 
+.table-wrapper {
+  width: 100%;
+}
+
 /* Table */
 table {
   width: 100%;
@@ -324,6 +332,16 @@ p {
 
   button {
     width: 100%;
+  }
+}
+@media (max-width: 450px) {
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    min-width: 700px;
   }
 }
 </style>
