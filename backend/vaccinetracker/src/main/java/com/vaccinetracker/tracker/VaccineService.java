@@ -19,6 +19,25 @@ public class VaccineService {
         return repository.save(record);
     }
 
+    public VaccineRecord update(Long id, VaccineRecord updated) {
+        VaccineRecord existing = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Vaccine not found"));
+
+        existing.setVaccineName(updated.getVaccineName());
+        existing.setDoseNumber(updated.getDoseNumber());
+        existing.setTotalDoses(updated.getTotalDoses());
+        existing.setDateTaken(updated.getDateTaken());
+        existing.setGapDays(updated.getGapDays());
+
+        calculateNextDose(existing);
+        return repository.save(existing);
+    }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
+
     public List<VaccineRecord> findAll() {
         return repository.findAll();
     }
