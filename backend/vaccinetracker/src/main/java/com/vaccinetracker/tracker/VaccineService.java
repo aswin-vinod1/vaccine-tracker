@@ -51,13 +51,23 @@ public class VaccineService {
     }
 
     private void calculateNextDose(VaccineRecord record) {
+
+
         if (record.getDoseNumber() >= record.getTotalDoses()) {
             record.setStatus("COMPLETED");
             record.setNextDueDate(null);
             return;
         }
 
-        LocalDate nextDate = record.getDateTaken().plusDays(record.getGapDays());
+        if (record.getGapDays() <= 0) {
+            record.setStatus("COMPLETED");
+            record.setNextDueDate(null);
+            return;
+        }
+
+        LocalDate nextDate =
+                record.getDateTaken().plusDays(record.getGapDays());
+
         record.setNextDueDate(nextDate);
 
         if (nextDate.isBefore(LocalDate.now())) {
@@ -66,5 +76,6 @@ public class VaccineService {
             record.setStatus("DUE");
         }
     }
+
 }
 
