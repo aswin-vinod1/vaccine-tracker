@@ -20,8 +20,6 @@
         required
       />
 
-      <input type="date" v-model="form.dateTaken" required />
-
       <input
         type="number"
         v-model.number="form.gapDays"
@@ -90,7 +88,6 @@ export default {
         vaccineName: "",
         doseNumber: "",
         totalDoses: "",
-        dateTaken: "",
         gapDays: "",
       },
     };
@@ -119,7 +116,6 @@ export default {
         vaccineName: vaccine.vaccineName,
         doseNumber: vaccine.doseNumber,
         totalDoses: vaccine.totalDoses,
-        dateTaken: vaccine.dateTaken,
         gapDays: vaccine.gapDays,
       };
     },
@@ -137,7 +133,6 @@ export default {
         vaccineName: "",
         doseNumber: "",
         totalDoses: "",
-        dateTaken: "",
         gapDays: "",
       };
     },

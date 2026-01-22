@@ -15,9 +15,13 @@ public class VaccineService {
     }
 
     public VaccineRecord save(VaccineRecord record) {
+        if (record.getDateTaken() == null) {
+            record.setDateTaken(LocalDate.now());
+        }
         calculateNextDose(record);
         return repository.save(record);
     }
+
 
     public VaccineRecord update(Long id, VaccineRecord updated) {
         VaccineRecord existing = repository.findById(id)
@@ -26,12 +30,16 @@ public class VaccineService {
         existing.setVaccineName(updated.getVaccineName());
         existing.setDoseNumber(updated.getDoseNumber());
         existing.setTotalDoses(updated.getTotalDoses());
-        existing.setDateTaken(updated.getDateTaken());
         existing.setGapDays(updated.getGapDays());
+
+        if (existing.getDateTaken() == null) {
+            existing.setDateTaken(LocalDate.now());
+        }
 
         calculateNextDose(existing);
         return repository.save(existing);
     }
+
 
     public void delete(Long id) {
         repository.deleteById(id);
